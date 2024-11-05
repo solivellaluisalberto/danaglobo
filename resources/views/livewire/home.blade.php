@@ -1,6 +1,12 @@
 <div>
-    <header class="py-10">
-        <p>TEXTO AQUÍ</p>
+    <header class="py-4">
+        <p>Esta aplicación ha sido creada para facilitar el acceso a productos básicos donados para los afectados por la reciente inundación en Valencia.</p> 
+        <p>Aquí podrás:</p>
+        <ul>
+            <li class="font-semibold"> - Ver los productos disponibles en los distintos almacenes de ayuda.</li>
+            <li class="font-semibold"> - Solicitar los artículos esenciales que necesites para ti y tu familia.</li>
+            <li class="font-semibold"> - Ver los pueblos y áreas donde cada almacén puede realizar entregas.</li>
+        </ul>
     </header>
 
     <main class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">

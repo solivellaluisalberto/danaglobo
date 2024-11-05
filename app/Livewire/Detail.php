@@ -3,17 +3,23 @@
 namespace App\Livewire;
 
 use App\Models\Almacen;
+use App\Models\Pedido;
 use Livewire\Component;
 
 class Detail extends Component
 {
     public Almacen $almacen;
 
+    public function redirectClick()
+    {
+        return redirect()->to('/');
+    }
+
     public $productsOrder = [];
 
     public $form = [
-        'phone' => '',
-        'address' => ''
+        'phone' => '1234',
+        'address' => 'ass'
     ];
 
     public function addToOrder($product)
@@ -24,6 +30,27 @@ class Detail extends Component
     public function removeProduct($index)
     {
         array_splice($this->productsOrder, $index, 1);
+    }
+
+    public $orderCompleted = false;
+
+    public function submitForm()
+    {
+
+        if ($this->form['phone'] && $this->form['address'])  {
+            $order = Pedido::create([
+                'phone' => $this->form['phone'],
+                'address' => $this->form['address'],
+                'almacen_id' => $this->almacen->id
+            ]);
+            foreach ($this->productsOrder as $p) {
+                $order->productos()->attach($p['id']);
+            }
+        } else {
+            dd('hoLA');
+        }
+
+
     }
 
     public function render()
