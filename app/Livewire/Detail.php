@@ -16,11 +16,6 @@ class Detail extends Component
         $this->productsOrder[] = $product;
     }
 
-    public function scrollToCartSection()
-    {
-        $this->dispatchBrowserEvent('scroll-to-cart');
-    }
-
     public function render()
     {
         return view('livewire.detail')->with([

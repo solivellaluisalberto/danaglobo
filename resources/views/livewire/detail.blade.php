@@ -26,12 +26,4 @@
         </button>
    @endif
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            window.livewire.on('scroll-to-cart', () => {
-                document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-
 </div>
