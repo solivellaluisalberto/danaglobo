@@ -21,11 +21,15 @@
 </head>
 <body class="font-sans antialiased">
 <div class="bg-gray-50 text-black/50">
-    <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
+    <div class="relative min-h-screen py-20 flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
         <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
             {{$slot}}
         </div>
     </div>
 </div>
+
+<footer class="py-16 text-center text-sm text-black">
+    Made with ❤️ for a better world.
+</footer>
 </body>
 </html>
