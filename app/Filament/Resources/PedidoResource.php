@@ -18,6 +18,9 @@ class PedidoResource extends Resource
 {
     protected static ?string $model = Pedido::class;
 
+    protected static ?string $tenantOwnershipRelationshipName = 'almacen';
+    protected static ?string $tenantRelationshipName = 'pedidos';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
