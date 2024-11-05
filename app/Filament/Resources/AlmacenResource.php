@@ -19,6 +19,8 @@ class AlmacenResource extends Resource
 {
     protected static ?string $model = Almacen::class;
 
+    protected static bool $isScopedToTenant = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -23,6 +23,11 @@ class Almacen extends Model
     {
         return $this->belongsToMany(Sitio::class, 'almacen_sitio', 'almacen_id', 'sitio_id');
     }
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'almacen_user', 'almacen_id', 'user_id');
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'almacen_user', 'almacen_id', 'user_id');
