@@ -11,7 +11,9 @@ class Pedido extends Model
     protected $fillable = [
         'phone',
         'address',
-        'almacen_id'
+        'almacen_id',
+        'enviado',
+        'entregado'
     ];
 
     public function almacen()

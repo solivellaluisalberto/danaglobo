@@ -58,6 +58,9 @@ class PedidoResource extends Resource
                 Tables\Columns\TextColumn::make('almacen.name')
                     ->badge()
                     ->searchable(),
+                Tables\Columns\ToggleColumn::make('enviado'),
+                Tables\Columns\ToggleColumn::make('entregado'),
+
             ])
             ->filters([
                 //
