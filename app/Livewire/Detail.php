@@ -11,9 +11,19 @@ class Detail extends Component
 
     public $productsOrder = [];
 
+    public $form = [
+        'phone' => '',
+        'address' => ''
+    ];
+
     public function addToOrder($product)
     {
         $this->productsOrder[] = $product;
+    }
+
+    public function removeProduct($index)
+    {
+        array_splice($this->productsOrder, $index, 1);
     }
 
     public function render()
