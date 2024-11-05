@@ -1,6 +1,17 @@
 <div class="w-full">
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="mb-4 flex gap-4">
+        <button wire:click="redirectClick()" class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            <svg class="rotate-180 w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+            Volver
+        </button>
+        <x-title  big="true" title="{{$almacen->name}}"></x-title>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach($productos as $producto)
             <x-card>
                 <x-title :title="$producto->name"></x-title>
@@ -15,16 +26,34 @@
     </div>
 
    @if(count($productsOrder) > 0)
-        <div class="mt-6" id="cart-section">
+        <div class="mt-6 mb-6" id="cart-section">
             <x-title title="PEDIDO"></x-title>
-            @foreach($productsOrder as $index => $productOrder)
-                <p>{{$productOrder['name']}}</p> <button wire:click="removeProduct({{$index}})">QUITAR</button>
-            @endforeach
+                @foreach($productsOrder as $index => $productOrder)
+                    <div class="flex gap-2">
+                        <p class="text-gray-700">{{$productOrder['name']}}</p>
+                        <button wire:click="removeProduct({{$index}})">
+                            <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor"  class="w-4 text-red-500"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16zm-9.489 5.14a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z" /><path d="M14 2a2 2 0 0 1 2 2a1 1 0 0 1 -1.993 .117l-.007 -.117h-4l-.007 .117a1 1 0 0 1 -1.993 -.117a2 2 0 0 1 1.85 -1.995l.15 -.005h4z" /></svg>
+                        </button>
+                    </div>
+                @endforeach
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="w-full">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Número de teléfono</label>
+                <input wire:model="form.phone" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="873634344">
+            </div>
+
+            <div class="w-full">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
+                <input wire:model="form.address" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Crtra. este es nuestro momento, 99">
+            </div>
+        </div>
+
+        <button wire:click="submitForm" class="bg-green-600 text-white rounded-md p-2 font-bold text-2xl mt-2">PEDIR</button>
 
         <a href="#cart-section" class="fixed bottom-5 right-5 bg-amber-600 rounded-full p-4 text-white">
             <svg  xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="w-12"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
         </a>
    @endif
-
 </div>
