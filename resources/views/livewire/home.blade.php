@@ -1,5 +1,5 @@
 <div>
-    <header class=" py-10">
+    <header class="py-10">
         <p>TEXTO AQUÍ</p>
     </header>
 
