@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Almacen extends Model
 {
-    protected $table = 'almacen';
+    protected $table = 'almacenes';
 
     protected $fillable = [
         'name',
@@ -19,6 +19,10 @@ class Almacen extends Model
         return $this->belongsToMany(Pedido::class, 'almacen_pedido', 'almacen_id', 'pedido_id');
     }
 
+    public function sitios()
+    {
+        return $this->belongsToMany(Sitio::class, 'almacen_sitio', 'almacen_id', 'sitio_id');
+    }
     public function users()
     {
         return $this->belongsToMany(User::class, 'almacen_user', 'almacen_id', 'user_id');

@@ -31,11 +31,13 @@ return new class extends Migration
 
         // PUEBLOS - PAIPORTA... ETC
         Schema::create('sitios', function (Blueprint $table) {
+            $table->id();
             $table->string('name')->unique();
+            $table->timestamps();
         });
 
         // SITIOS DONDE REPARTE
-        Schema::create('almacen_sitios', function (Blueprint $table) {
+        Schema::create('almacen_sitio', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('sitio_id');
@@ -50,13 +52,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('almacen_productos', function (Blueprint $table) {
+        Schema::create('almacen_producto', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('producto_id');
             $table->unsignedBigInteger('almacen_id');
             $table->timestamps();
             $table->foreign('producto_id')->references('id')->on('productos');
-            $table->foreign('almacen_id')->references('id')->on('almacens');
+            $table->foreign('almacen_id')->references('id')->on('almacenes');
         });
 
         Schema::create('pedidos', function (Blueprint $table) {
@@ -64,9 +66,10 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->unsignedBigInteger('almacen_id');
+            $table->timestamps();
         });
 
-        Schema::create('pedidos_productos', function (Blueprint $table) {
+        Schema::create('pedido_producto', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('producto_id');
@@ -81,6 +84,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('pedido_producto');
+        Schema::dropIfExists('almacen_producto');
+        Schema::dropIfExists('almacen_sitio');
+        Schema::dropIfExists('almacen_user');
+        Schema::dropIfExists('sitios');
+        Schema::dropIfExists('productos');
+        Schema::dropIfExists('almacenes');
+        Schema::dropIfExists('pedidos');
     }
 };
