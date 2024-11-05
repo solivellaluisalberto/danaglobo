@@ -1,6 +1,6 @@
 <div>
-    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-        <p></p>
+    <header class=" py-10">
+        <p>TEXTO AQUÍ</p>
     </header>
 
     <main class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
