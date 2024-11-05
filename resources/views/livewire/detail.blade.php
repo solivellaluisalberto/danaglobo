@@ -1,5 +1,11 @@
 <div class="w-full">
 
+    @if($orderCompleted)
+
+    @else
+
+    @endif
+
     <div class="mb-4 flex gap-4">
         <button wire:click="redirectClick()" class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
             <svg class="rotate-180 w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -11,19 +17,36 @@
     </div>
 
 
+        @if(!$orderCompleted)
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach($productos as $producto)
             <x-card>
                 <x-title :title="$producto->name"></x-title>
-                <button wire:click="addToOrder({{$producto}})" class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                    Añadir
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                    </svg>
-                </button>
+
+                    <button wire:click="addToOrder({{$producto}})" class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        Añadir
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </button>
+
             </x-card>
         @endforeach
     </div>
+        @endif
+
+        @if($orderCompleted)
+            <div class="w-full bg-green-600 text-white p-2 rounded-lg">
+                <p>Pedido realizado correctamente</p>
+            </div>
+            <button wire:click="resetForm" class=" mt-2 bg-blue-500 rounded-lg p-2 text-white">REALIZAR OTRO</button>
+        @endif
+
+        @if($errorMessage)
+            <div class="w-full bg-red-600 text-white p-2 rounded-lg mt-4">
+                <p>{{$errorMessage}}</p>
+            </div>
+        @endif
 
    @if(count($productsOrder) > 0)
         <div class="mt-6 mb-6" id="cart-section">

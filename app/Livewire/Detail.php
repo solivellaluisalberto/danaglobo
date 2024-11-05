@@ -18,8 +18,8 @@ class Detail extends Component
     public $productsOrder = [];
 
     public $form = [
-        'phone' => '1234',
-        'address' => 'ass'
+        'phone' => '',
+        'address' => ''
     ];
 
     public function addToOrder($product)
@@ -33,9 +33,9 @@ class Detail extends Component
     }
 
     public $orderCompleted = false;
+    public $errorMessage = "";
 
-    public function submitForm()
-    {
+    public function submitForm() {
 
         if ($this->form['phone'] && $this->form['address'])  {
             $order = Pedido::create([
@@ -46,11 +46,22 @@ class Detail extends Component
             foreach ($this->productsOrder as $p) {
                 $order->productos()->attach($p['id']);
             }
+            $this->orderCompleted = true;
+            $this->form = [
+                'phone' => '',
+                'address' => ''
+            ];
+            $this->productsOrder = [];
         } else {
-            dd('hoLA');
+            $this->errorMessage = 'Hay algún error en el formulario, asegurate de poner un teléfono válido.';
         }
 
 
+    }
+
+    public function resetForm()
+    {
+        $this->orderCompleted = false;
     }
 
     public function render()
