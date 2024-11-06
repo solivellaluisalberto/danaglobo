@@ -9,6 +9,8 @@ use Livewire\Component;
 class Voluntarios extends Component
 {
     public $phone;
+    public $phoner;
+    public $name;
 
     public function login()
     {
@@ -29,6 +31,41 @@ class Voluntarios extends Component
 
         // Mostrar mensaje de error si falla la autenticación
         session()->flash('error', 'Credenciales inválidas.');
+    }
+
+    public function register()
+    {
+        $this->validate([
+            'phoner' => 'required|numeric',
+            'name' => 'required|string'
+        ]);
+
+        $user = Voluntario::where('phone', $this->phoner)->first();
+
+        if ($user) {
+            session()->flash('error_register', 'Ya existe un usuario con este teléfono.');
+            // Iniciar sesión manualmente
+        } else {
+            $user = Voluntario::create([
+                'phone' => $this->phoner,
+                'name' => $this->name,
+            ]);
+            // Iniciar sesión manualmente
+            Auth::guard('voluntario')->login($user);
+            session()->regenerate();
+            return redirect()->intended('/voluntarios');
+        }
+
+        // Mostrar mensaje de error si falla la autenticación
+        session()->flash('error_register', 'Introduce todos los datos.');
+    }
+
+    public function logout()
+    {
+        Auth::guard('voluntario')->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/voluntarios');
     }
     public function render()
     {

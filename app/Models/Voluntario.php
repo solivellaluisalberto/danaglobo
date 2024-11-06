@@ -11,7 +11,8 @@ class Voluntario extends Authenticatable
     protected $table = 'voluntarios';
 
     protected $fillable = [
-        'phone'
+        'phone',
+        'name'
     ];
 
     public function pedidos()
