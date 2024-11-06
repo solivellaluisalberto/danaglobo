@@ -49,7 +49,24 @@ class Detail extends Component
 
     public function addToOrder($product)
     {
-        $this->productsOrder[] = $product;
+        $this->productsOrder[] = [
+            'product' => $product,
+            'quantity' => 1,
+        ];
+    }
+
+    public function updateQuantity($productoId, $quantity) {
+        // Recorremos productsOrder para buscar el producto con el id especificado
+        foreach ($this->productsOrder as &$orderItem) {
+            if ($orderItem['product']['id'] === $productoId) {
+                // Actualizamos la cantidad del producto
+                $orderItem['quantity'] = $quantity;
+                break;
+            }
+        }
+    
+        // Forzamos la actualización en la vista de Livewire
+        $this->productsOrder = array_values($this->productsOrder);
     }
 
     public function removeProduct($index)
@@ -68,8 +85,11 @@ class Detail extends Component
                 'address' => $this->form['address'],
                 'almacen_id' => $this->almacen->id
             ]);
+            // Adjuntar productos al pedido, según la cantidad especificada
             foreach ($this->productsOrder as $p) {
-                $order->productos()->attach($p['id']);
+                for ($i = 0; $i < $p['quantity']; $i++) {
+                    $order->productos()->attach($p['product']['id']);
+                }
             }
             $this->orderCompleted = true;
             $this->form = [
@@ -80,8 +100,6 @@ class Detail extends Component
         } else {
             $this->errorMessage = 'Hay algún error en el formulario, asegurate de poner un teléfono válido.';
         }
-
-
     }
 
     public function resetForm()
