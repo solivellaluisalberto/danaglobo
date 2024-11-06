@@ -1,6 +1,6 @@
 <div>
     <header class="py-4">
-        <p>Esta aplicación ha sido creada para facilitar el acceso a productos básicos donados para los afectados por la reciente inundación en Valencia.</p> 
+        <p>Esta aplicación ha sido creada para facilitar el acceso a productos básicos donados para los afectados por la reciente inundación en Valencia.</p>
         <p>Aquí podrás:</p>
         <ul>
             <li class="font-semibold"> - Ver los productos disponibles en los distintos almacenes de ayuda.</li>
@@ -8,6 +8,12 @@
             <li class="font-semibold"> - Ver los pueblos y áreas donde cada almacén puede realizar entregas.</li>
         </ul>
     </header>
+
+    <div class="bg-green-600 text-white p-4 rounded-lg text-center">
+        <p>Para que los voluntarios accedáis al panel y podáis aceptar los pedidos de los afectados, pulsad el siguiente botón.</p>
+        <p>Información importante: antes de aceptar un pedido, aseguraos de que este pertenece al almacén más cercano o al que tengáis accesible.</p>
+        <button class="p-2 bg-white rounded-md text-green-600 hover:bg-green-700 hover:text-white mt-2">PANEL VOLUNTARIOS</button>
+    </div>
 
     <main class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach($almacenes as $almacen)

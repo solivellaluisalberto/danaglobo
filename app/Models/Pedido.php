@@ -25,5 +25,10 @@ class Pedido extends Model
     {
         return $this->belongsToMany(Producto::class);
     }
+
+    public function voluntario()
+    {
+        return $this->belongsTo(Voluntario::class);
+    }
 }
 

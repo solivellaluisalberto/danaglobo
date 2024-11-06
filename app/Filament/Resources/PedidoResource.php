@@ -30,17 +30,18 @@ class PedidoResource extends Resource
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255) ->required(),
                 Forms\Components\TextInput::make('address')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->required(),
                 Forms\Components\Select::make('productos')
                     ->relationship('productos', 'name')
                     ->multiple()
                     ->searchable()
                     // ->createOptionForm(Sitio::getForm())
                     ->preload(),
-                Forms\Components\Select::make('almacen_id')->relationship('almacen', 'name')
+                Forms\Components\Select::make('almacen_id')->relationship('almacen', 'name') ->required(),
+                Forms\Components\Select::make('voluntario_id')->relationship('voluntario', 'phone')
             ]);
     }
 
@@ -58,13 +59,15 @@ class PedidoResource extends Resource
                 Tables\Columns\TextColumn::make('almacen.name')
                     ->badge()
                     ->searchable(),
-                Tables\Columns\ToggleColumn::make('enviado'),
-                Tables\Columns\ToggleColumn::make('entregado'),
+                Tables\Columns\ToggleColumn::make('enviado')->sortable(),
+                Tables\Columns\ToggleColumn::make('entregado')->sortable(),
+                Tables\Columns\TextColumn::make('voluntario.phone'),
 
             ])
             ->filters([
                 //
             ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

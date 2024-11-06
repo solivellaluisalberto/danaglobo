@@ -71,7 +71,7 @@
 
             <div class="w-full">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
-                <input wire:model="form.address" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Crtra. este es nuestro momento, 99">
+                <input wire:model="form.address" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Crtra. prueba, 32">
             </div>
         </div>
 
