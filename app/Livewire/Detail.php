@@ -13,7 +13,6 @@ class Detail extends Component
 
     public $productos;
     public $productosSearch;
-    public $observaciones = 'hola mundo';
 
     public function mount()
     {
@@ -31,6 +30,7 @@ class Detail extends Component
     public $form = [
         'phone' => '',
         'address' => '',
+        'observaciones' => ''
     ];
 
     public $searchTerm = "";
@@ -84,7 +84,7 @@ class Detail extends Component
             $order = Pedido::create([
                 'phone' => $this->form['phone'],
                 'address' => $this->form['address'],
-                'observaciones' => $this->observaciones,
+                'observaciones' => $this->form['observaciones'],
                 'almacen_id' => $this->almacen->id
             ]);
             // Adjuntar productos al pedido, según la cantidad especificada
