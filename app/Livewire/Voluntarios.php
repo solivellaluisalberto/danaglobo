@@ -13,6 +13,7 @@ class Voluntarios extends Component
     public $phoner;
     public $name;
 
+    public $hora_estimada_recogida = [];
     public function login()
     {
         // Validar los datos ingresados
@@ -64,10 +65,15 @@ class Voluntarios extends Component
     public function aceptOrder($pedidoId)
     {
 
+        $validatedData = $this->validate([
+            "hora_estimada_recogida.$pedidoId" => 'required|string',
+        ]);
+
         $pedido = Pedido::find($pedidoId);
 
-        if ($pedido->voluntario_id == null) {
+        if ($pedido->voluntario_id === null) {
             $pedido->voluntario_id = Auth::guard('voluntario')->user()->id;
+            $pedido->hora_estimada_recogida = $this->hora_estimada_recogida[$pedidoId];
             $pedido->save();
         } else {
             session()->flash('error_pedido_'.$pedidoId, 'Este pedido ya ha sido aceptado por alguien.');
@@ -107,7 +113,7 @@ class Voluntarios extends Component
     {
         return view('livewire.voluntarios')->with([
             'pedidos' => Pedido::where('voluntario_id',null)->where('entregado',false)->get(),
-            'misPedidos' => Auth::guard('voluntario')->user()->pedidos()->where('entregado',false)->get(),
+            'misPedidos' => Auth::guard('voluntario')->user() ? Auth::guard('voluntario')->user()->pedidos()->where('entregado',false)->get() : null,
         ]);
     }
 }
