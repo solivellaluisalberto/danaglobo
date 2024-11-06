@@ -15,7 +15,8 @@ class Pedido extends Model
         'enviado',
         'entregado',
         'hora_estimada_recogida',
-        'voluntario_id'
+        'voluntario_id',
+        'observaciones'
     ];
 
     public function almacen()

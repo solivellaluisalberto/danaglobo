@@ -83,6 +83,11 @@
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
                 <input wire:model="form.address" type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Crtra. prueba, 32">
             </div>
+
+            <div class="w-full">
+                <label for="observaciones" class="block mb-2 text-sm font-medium text-gray-900">Observaciones</label>
+                <input type="text" id="observaciones" wire.model="observaciones"></input>
+            </div>
         </div>
 
         <button wire:click="submitForm" class="bg-green-600 text-white rounded-md p-2 font-bold text-2xl mt-2">PEDIR</button>
