@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Pedido;
 use App\Models\Voluntario;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -69,6 +70,9 @@ class Voluntarios extends Component
     }
     public function render()
     {
-        return view('livewire.voluntarios');
+        return view('livewire.voluntarios')->with([
+            'pedidos' => Pedido::where('voluntario_id',null)->where('entregado',false)->get(),
+            'misPedidos' => Auth::guard('voluntario')->user()->pedidos()->get(),
+        ]);
     }
 }
