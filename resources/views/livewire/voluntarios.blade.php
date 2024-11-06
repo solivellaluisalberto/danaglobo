@@ -21,6 +21,11 @@
                 @foreach($misPedidos as $miPedido)
                     <x-card>
                         <x-title title="{{$miPedido->almacen->name}}"></x-title>
+                        @if (session()->has('error_pedido_'.$miPedido->id))
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                                <span class="block sm:inline">{{ session('error_pedido_'.$miPedido->id) }}</span>
+                            </div>
+                        @endif
                         <div class="mb-4">
                             <p class="text-gray-700 font-bold">Solicitante</p>
                             <div class="w-full flex mt-1 gap-2 flex-wrap flex-col">
@@ -36,17 +41,31 @@
                                 @endforeach
                             </div>
                         </div>
-                        <button wire:click="redirectClick({{$miPedido->id}})"
-                                class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                            Marcar como entregado
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </button>
+                        <div>
+                            <button wire:click="redirectClick({{$miPedido->id}})"
+                                    class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                Marcar como entregado
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </button>
+
+                            <button wire:click="quitarPedido({{$miPedido->id}})"
+                                    class="cursor-pointer inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                Cancelar
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </button>
+                        </div>
                     </x-card>
                 @endforeach
             </div>
