@@ -64,7 +64,7 @@ class PedidoResource extends Resource
                 Tables\Columns\ToggleColumn::make('enviado')->sortable(),
                 Tables\Columns\ToggleColumn::make('entregado')->sortable(),
                 Tables\Columns\TextColumn::make('voluntario.name'),
-
+                Tables\Columns\TextColumn::make('observaciones')
             ])
             ->filters([
                 //
