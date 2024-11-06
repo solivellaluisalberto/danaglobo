@@ -86,7 +86,7 @@
 
             <div class="w-full">
                 <label for="observaciones" class="block mb-2 text-sm font-medium text-gray-900">Observaciones</label>
-                <input type="text" id="observaciones" wire.model="observaciones"></input>
+                <input type="text" id="observaciones" wire:model="form.observaciones"></input>
             </div>
         </div>
 
