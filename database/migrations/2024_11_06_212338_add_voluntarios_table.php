@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::table('pedidos', function (Blueprint $table) {
             $table->unsignedBigInteger('voluntario_id')->nullable();
             $table->foreign('voluntario_id')->references('id')->on('voluntarios');
-            $table->string('hora_estimada_recogida');
+            $table->string('hora_estimada_recogida')->nullable();
         });
     }
 
