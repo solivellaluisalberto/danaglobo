@@ -85,6 +85,17 @@ class Voluntarios extends Component
         }
     }
 
+    public function marcarEntregado($pedidoId)
+    {
+        $pedido = Pedido::find($pedidoId);
+        if ($pedido->voluntario_id == Auth::guard('voluntario')->user()->id) {
+            $pedido->entregado = 1;
+            $pedido->save();
+        } else {
+            session()->flash('error_pedido_'.$pedidoId, 'Este pedido no es tuyo.');
+        }
+    }
+
     public function logout()
     {
         Auth::guard('voluntario')->logout();
@@ -96,7 +107,7 @@ class Voluntarios extends Component
     {
         return view('livewire.voluntarios')->with([
             'pedidos' => Pedido::where('voluntario_id',null)->where('entregado',false)->get(),
-            'misPedidos' => Auth::guard('voluntario')->user()->pedidos()->get(),
+            'misPedidos' => Auth::guard('voluntario')->user()->pedidos()->where('entregado',false)->get(),
         ]);
     }
 }
