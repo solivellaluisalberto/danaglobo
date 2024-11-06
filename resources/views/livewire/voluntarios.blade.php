@@ -97,18 +97,33 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <button wire:click="aceptOrder({{$pedido->id}})"
-                                    class="cursor-pointer inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                Aceptar pedido
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="ml-2">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M12 5l0 14"/>
-                                    <path d="M5 12l14 0"/>
-                                </svg>
-                            </button>
+                            <form wire:submit.prevent = "aceptOrder({{$pedido->id}})"
+                                  class="flex flex-row gap-x-2 items-end flex-wrap">
+                                <button
+                                    type="submit"
+                                        class="w-fit h-fit cursor-pointer inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                    Aceptar pedido
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="ml-2">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M12 5l0 14"/>
+                                        <path d="M5 12l14 0"/>
+                                    </svg>
+                                </button>
+                                <div>
+                                    <label for="hora_estimada_recogida_{{ $pedido->id }}" class="block text-gray-700 font-medium text-sm">Hora estimada de recogida</label>
+                                    <input
+                                        type="time"
+                                        id="hora_estimada_recogida_{{ $pedido->id }}"
+                                        wire:model="hora_estimada_recogida.{{ $pedido->id }}"
+                                        required
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    >
+                                </div>
+                            </form>
+
                         </x-card>
                     @endforeach
                 </div>
