@@ -1,5 +1,7 @@
 <div>
 
+    <a href="/" class="bg-green-600 text-white hover:bg-green-700 p-2 rounded-md">VOLVER</a>
+
 
     @voluntario
     <div class="w-full">
