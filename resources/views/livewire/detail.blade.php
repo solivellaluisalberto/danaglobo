@@ -16,10 +16,12 @@
         <x-title  big="true" title="{{$almacen->name}}"></x-title>
     </div>
 
+        <input wire:model.debounce.300ms.live="searchTerm" type="text"  class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Agua...">
+
 
         @if(!$orderCompleted)
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        @foreach($productos as $producto)
+        @foreach($productosSearch as $producto)
             <x-card>
                 <x-title :title="$producto->name"></x-title>
 
