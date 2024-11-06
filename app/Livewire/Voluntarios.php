@@ -113,7 +113,7 @@ class Voluntarios extends Component
     {
         return view('livewire.voluntarios')->with([
             'pedidos' => Pedido::where('voluntario_id',null)->where('entregado',false)->get(),
-            'misPedidos' => Auth::guard('voluntario')->user()->pedidos()->where('entregado',false)->get(),
+            'misPedidos' => Auth::guard('voluntario')->user() ? Auth::guard('voluntario')->user()->pedidos()->where('entregado',false)->get() : null,
         ]);
     }
 }
