@@ -11,7 +11,7 @@
 
     <div class="bg-green-600 text-white p-4 rounded-lg text-center">
         <p>Para que los voluntarios accedáis al panel y podáis aceptar los pedidos de los afectados, pulsad el siguiente botón.</p>
-        <p>Información importante: antes de aceptar un pedido, aseguraos de que este pertenece al almacén más cercano o al que tengáis accesible.</p>
+        <p class="mb-4">Información importante: antes de aceptar un pedido, aseguraos de que este pertenece al almacén más cercano o al que tengáis accesible.</p>
         <a href="/voluntarios" class="p-2 bg-white rounded-md text-green-600 hover:bg-green-700 hover:text-white mt-4">PANEL VOLUNTARIOS</a>
     </div>
 
