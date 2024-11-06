@@ -61,6 +61,21 @@ class Voluntarios extends Component
         session()->flash('error_register', 'Introduce todos los datos.');
     }
 
+    public function aceptOrder($pedidoId)
+    {
+
+        $pedido = Pedido::find($pedidoId);
+
+        if ($pedido->voluntario_id == null) {
+            $pedido->voluntario_id = Auth::guard('voluntario')->user()->id;
+            $pedido->save();
+        } else {
+            session()->flash('error_pedido_'.$pedidoId, 'Este pedido ya ha sido aceptado por alguien.');
+        }
+
+
+    }
+
     public function logout()
     {
         Auth::guard('voluntario')->logout();

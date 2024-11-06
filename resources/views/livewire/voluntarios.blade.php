@@ -15,8 +15,8 @@
                 recogerse los productos, la dirección de entrega y los productos incluidos.</p>
             <p>Por favor, acepta los pedidos con responsabilidad.</p>
         </div>
-        <div class="flex flex-col">
-            <h1>Mis Pedidos</h1>
+        <div class="flex flex-col mt-4">
+            <h1 class="text-4xl text-gray-700 italic">Mis pedidos en reparto</h1>
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                 @foreach($misPedidos as $miPedido)
                     <x-card>
@@ -51,29 +51,34 @@
                 @endforeach
             </div>
 
-            <div class="flex flex-col">
-                <h1>Pedidos</h1>
+            <div class="flex flex-col mt-8">
+                <h1 class="text-4xl text-black">Pedidos pendientes</h1>
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    @foreach($pedidos as $miPedido)
+                    @foreach($pedidos as $pedido)
                         <x-card>
-                            <x-title title="{{$miPedido->almacen->name}}"></x-title>
+                            <x-title title="{{$pedido->almacen->name}}"></x-title>
+                            @if (session()->has('error_pedido_'.$pedido->id))
+                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                                    <span class="block sm:inline">{{ session('error_pedido_'.$pedido->id) }}</span>
+                                </div>
+                            @endif
                             <div class="mb-4">
                                 <p class="text-gray-700 font-bold">Solicitante</p>
                                 <div class="w-full flex mt-1 gap-2 flex-wrap flex-col">
-                                    <x-filament::badge size="lg">{{$miPedido->phone}}</x-filament::badge>
-                                    <x-filament::badge size="lg">{{$miPedido->address}}</x-filament::badge>
+                                    <x-filament::badge size="lg">{{$pedido->phone}}</x-filament::badge>
+                                    <x-filament::badge size="lg">{{$pedido->address}}</x-filament::badge>
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <p class="text-gray-700 font-bold">Productos</p>
                                 <div class="w-full flex mt-1 gap-2 flex-wrap">
-                                    @foreach($miPedido->productos()->orderBy('name', 'asc')->get() as $producto)
+                                    @foreach($pedido->productos()->orderBy('name', 'asc')->get() as $producto)
                                         <x-filament::badge size="lg"
                                                            color="danger">{{$producto->name}}</x-filament::badge>
                                     @endforeach
                                 </div>
                             </div>
-                            <button wire:click="redirectClick({{$miPedido->id}})"
+                            <button wire:click="aceptOrder({{$pedido->id}})"
                                     class="cursor-pointer inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                 Aceptar pedido
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
