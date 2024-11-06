@@ -53,6 +53,8 @@ class PedidoResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('hora_estimada_recogida')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('productos.name')
                     ->badge()
                     ->searchable(),

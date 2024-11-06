@@ -20,6 +20,7 @@ return new class extends Migration
         Schema::table('pedidos', function (Blueprint $table) {
             $table->unsignedBigInteger('voluntario_id')->nullable();
             $table->foreign('voluntario_id')->references('id')->on('voluntarios');
+            $table->string('hora_estimada_recogida');
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
         Schema::table('pedidos', function (Blueprint $table) {
             $table->dropForeign('pedidos_voluntario_id_foreign');
             $table->dropColumn('voluntario_id');
+            $table->dropColumn('hora_estimada_recogida');
         });
         Schema::dropIfExists('voluntarios');
     }
