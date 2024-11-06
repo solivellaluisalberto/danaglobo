@@ -85,6 +85,7 @@ class Voluntarios extends Component
         $pedido = Pedido::find($pedidoId);
         if ($pedido->voluntario_id == Auth::guard('voluntario')->user()->id) {
             $pedido->voluntario_id = null;
+            $pedido->hora_estimada_recogida = null;
             $pedido->save();
         } else {
             session()->flash('error_pedido_'.$pedidoId, 'Este pedido no es tuyo.');
