@@ -15,7 +15,7 @@ class Home extends Component
 
     public function render()
     {
-        $almacenes = Almacen::orderBy('name', 'asc')->get();
+        $almacenes = Almacen::where('name','!=','TEST')->orderBy('name', 'asc')->get();
         return view('livewire.home')->with([
             'almacenes' => $almacenes
         ]);
