@@ -55,9 +55,29 @@ class PedidoResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('hora_estimada_recogida')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('productos.name')
-                    ->badge()
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('productos')
+                    ->formatStateUsing(
+                        function ($record) {
+                            $productCounts = [];
+                        
+                            // Contamos la cantidad de cada producto
+                            foreach ($record->productos as $producto) {
+                                if (isset($productCounts[$producto->name])) {
+                                    $productCounts[$producto->name]++;
+                                } else {
+                                    $productCounts[$producto->name] = 1;
+                                }
+                            }
+                        
+                            // Construimos el string de lista de productos
+                            $productList = '';
+                            foreach ($productCounts as $name => $count) {
+                                $productList .= "| {$name} x{$count} ";
+                            }
+                        
+                            return $productList;
+                        }
+                    ),
                 Tables\Columns\TextColumn::make('almacen.name')
                     ->badge()
                     ->searchable(),
